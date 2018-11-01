@@ -55,10 +55,10 @@ var uiPicker = function picker(elem, prop){
 		//function declarations
 		var currID = 0;
 		function scrollTo(index){
+			selectedValue = prop.data[index].value;
 			easeAnim(list, "scrollTop", list.scrollTop, index * prop.itemHeight, function(){
 				setBold(index);
     			currID = index;
-    			selectedValue = prop.data[index].value;
 			})
 		}scrollTo(0); //defaulting to first value
 
@@ -87,11 +87,16 @@ var uiPicker = function picker(elem, prop){
 
 	//returning object
 	const pickerObject = {
-		getvalue : function(){
+		getValue : function(){
 			return selectedValue;
 		},
-		setValue : function(index){
-			scrollTo(index);
+		setValue : function(value){
+			for(var i=0; i<prop.data.length; i++){
+				if(prop.data[i].value === value){
+					scrollTo(i);
+					break;
+				}
+			}
 		}
 	}
 	return pickerObject;

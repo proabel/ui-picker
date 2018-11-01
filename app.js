@@ -92,6 +92,9 @@
 		visibleNos: 5,
 		itemHeight: 35
 	});
-	uiPicker.getLength();
+	uiPicker.setValue(5);
+
+	console.log(uiPicker.getValue());
+
 
 }
