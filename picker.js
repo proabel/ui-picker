@@ -4,6 +4,7 @@ var uiPicker = function picker(elem, prop){
 		//intializing variables
 		prop.visibleNos = (prop.visibleNos - 1 + (prop.visibleNos % 2)) || 5 //must be an odd number
 		prop.vOffset = Math.floor(prop.visibleNos/2);
+		var selectedValue;
 
 		//intializing html variables
 		var list = document.createElement('ul');
@@ -57,6 +58,7 @@ var uiPicker = function picker(elem, prop){
 			easeAnim(list, "scrollTop", list.scrollTop, index * prop.itemHeight, function(){
 				setBold(index);
     			currID = index;
+    			selectedValue = prop.data[index].value;
 			})
 		}scrollTo(0); //defaulting to first value
 
@@ -85,11 +87,11 @@ var uiPicker = function picker(elem, prop){
 
 	//returning object
 	const pickerObject = {
-		getLength : function(){
-			console.log(prop.data.length);
+		getvalue : function(){
+			return selectedValue;
 		},
-		setValue : function(id){
-
+		setValue : function(index){
+			scrollTo(index);
 		}
 	}
 	return pickerObject;
